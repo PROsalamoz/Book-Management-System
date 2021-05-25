@@ -53,49 +53,14 @@
                   <button id="backcat" class="btn btn-primary ">back</button>
               </form>
 
+               {% for cat in categories|slice:'8' %}
                   <li style="cursor: pointer;" class="nav-item">
                     <a id="" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>test 1</p>
+                      <p>{{ cat.name }}</p>
                     </a>
                   </li>
-
-                  <li style="cursor: pointer;" class="nav-item">
-                    <a id="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>test 2</p>
-                    </a>
-                  </li>
-
-                  <li style="cursor: pointer;" class="nav-item">
-                    <a id="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>test 3</p>
-                    </a>
-                  </li>
-
-                  <li style="cursor: pointer;" class="nav-item">
-                    <a id="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>test 4</p>
-                    </a>
-                  </li>
-
-                  <li style="cursor: pointer;" class="nav-item">
-                    <a id="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>test 5</p>
-                    </a>
-                  </li>
-
-                  <li style="cursor: pointer;" class="nav-item">
-                    <a id="" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>test 6</p>
-                    </a>
-                  </li>
-
-
+                {% endfor %}
             </ul>
           </li>
 

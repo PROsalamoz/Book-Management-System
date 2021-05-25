@@ -144,10 +144,17 @@
                   </div>
                 </div>
 
-                <div style="background: url({{ book.book_image.url }}); background-size: cover" class="widget-user-header bg-info">
+                 {% if book.book_image %}
+                    <div style="background: url({{ book.book_image.url }}); background-size: cover" class="widget-user-header bg-info">
+                      <h3 class="widget-user-username">{{ book.title | title }}</h3>
+                      <h5 class="widget-user-desc">{{ book.author }}</h5>
+                    </div>
+                    {% else %}
+                    <div class="widget-user-header bg-info">
                   <h3 class="widget-user-username">{{ book.title | title }}</h3>
                   <h5 class="widget-user-desc">{{ book.author }}</h5>
                 </div>
+                {% endif %}
                 <div class="widget-user-image">
                     {% if book.author_image %}
                   <img style="width:100px; height: 100px;" class="img-circle elevation-2" src="{{ book.author_image.url }}" alt="User Avatar">
