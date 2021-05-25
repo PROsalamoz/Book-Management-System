@@ -4,6 +4,9 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 
 class Book(models.Model):
     book_status = [
@@ -22,3 +25,6 @@ class Book(models.Model):
     active = models.BooleanField(default=True)
     status = models.CharField(max_length=50, choices=book_status)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.title
