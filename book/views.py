@@ -42,9 +42,11 @@ def books(request):
             books = books.filter(title__icontains=title)
 
     categories = Category.objects.all()
+    category_form = CategoryForm()
     context = {
         'books': books,
-        'categories': categories
+        'categories': categories,
+        'category_form': category_form,
     }
     return render(request, 'pages/book.html', context)
 
