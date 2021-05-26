@@ -22,6 +22,7 @@ class Book(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     price_for_rent = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     rent_period = models.IntegerField(null=True, blank=True)
+    total_rented_price = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     active = models.BooleanField(default=True)
     status = models.CharField(max_length=50, choices=book_status)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)

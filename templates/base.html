@@ -58,6 +58,43 @@
   });
 </script>
 <script>
+{#myscript#}
+var total = 0;
+    var total_sold = 0;
+    var total_rented = 0;
+
+    $(document).ready(function(){
+
+        $('.total_price').each(function(){
+            $(this).hide()
+            total += parseInt($(this).text())
+        });
+         $('#totalsalarys').text($('#totalsalarys').text()+total)
+
+
+        $('.price_sold').each(function(){
+            $(this).hide()
+            total_sold += parseInt($(this).text())
+        });
+        $('.total_sold').text(total_sold)
+         $('.total_sold').hide()
+
+
+        $('.price_rented').each(function(){
+            $(this).hide()
+            total_rented += parseInt($(this).text())
+        });
+        $('.total_rented').text(total_rented)
+        $('.total_rented').hide()
+
+    });
+
+        $('#catinput').hide()
+        $('#addcat').click(function (){
+            $('#catinput').toggle()
+        });
+
+{#        end_my_script#}
 $(function () {
   'use strict'
 
@@ -90,14 +127,14 @@ $(function () {
           backgroundColor: '#007bff',
           borderColor    : '#007bff',
           data           : [
-               '50',
+            `${total_sold}`
           ]
         },
         {
           backgroundColor: '#ced4da',
           borderColor    : '#ced4da',
           data           : [
-                '30',
+             `${total_rented}`
           ]
         }
       ]
@@ -157,7 +194,7 @@ $(function () {
     type: 'pie',
     data: {
       datasets: [{
-        data: ['35','25','40'],
+        data: ['{{ available_books }}','{{ sold_books }}','{{ rented_books }}'],
         backgroundColor :["#27c100","#f3545d","#fdaf4b"],
         borderWidth: 10,
 
@@ -193,13 +230,7 @@ $(function () {
 </script>
 
 <script>
-        $('#catinput').hide()
-        $('#addcat').click(function (){
-            $('#catinput').toggle()
-        });
-
-
-        {% for book in books %}
+    {% for book in books %}
              $('.cat{{ book.category.id }}').click(function(){
                 $('.hide_all_book').hide()
                 $('.book{{ book.category.id }}').show()
@@ -211,6 +242,11 @@ $(function () {
              });
         {% endfor %}
 
+        $('#rented_period').keyup(function(){
+            var price = $('#rented_price').val()
+            var period = $('#rented_period').val()
+            $('#total_rented_price').val(price * period)
+        });
 </script>
 </body>
 </html>

@@ -47,10 +47,24 @@
                     <h3 class="card-title">الارباح</h3>
                   </div>
                 </div>
+                  {% for book in books %}
+
+                    {% if book.price != None and book.status == 'sold' %}
+                        <p class="total_price price_sold">{{ book.price }}</p>
+                    {% elif book.total_rented_price != None and book.status == 'rented' %}
+                        <p class="total_price price_rented">{{ book.total_rented_price }}</p>
+                    {% endif %}
+
+                  {% endfor %}
+                  <!--total sold -->
+                  <p class="total_sold"></p>
+                  <!--total rented -->
+                  <p class="total_rented"></p>
+
                 <div class="card-body">
                   <div class="d-flex">
                     <p class="d-flex flex-column">
-                      <span id="totalsalarys" class="text-bold text-lg">$250</span><br></p>
+                      <span id="totalsalarys" class="text-bold text-lg">ج</span><br></p>
                   </div>
                   <!-- /.d-flex -->
 
