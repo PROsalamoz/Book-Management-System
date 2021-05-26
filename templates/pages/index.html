@@ -25,7 +25,7 @@
                 <div class="card-body">
                   <div class="d-flex">
                     <p class="d-flex flex-column">
-                      <span class="text-bold text-lg">500</span>
+                      <span class="text-bold text-lg">{{ all_books }}</span>
                       <span>اجمالي عدد الكتب</span>
                     </p>
                   </div>
@@ -108,13 +108,12 @@
           <!-- تصنيفات-->
 
           <div class="row justify-content-center mb-3">
-            <div class="col-4 ">
+            <div class="col-4">
               <ul class="nav">
-
                   {% for cat in categories|slice:'8' %}
-                    <li class="nav-item ">
-                  <a id="" class="nav-link bg-primary" href="#">{{ cat.name }}</a>
-                </li>
+                    <li class="nav-item cat{{ cat.id }}">
+                        <a style="cursor: pointer" id="" class="nav-link bg-primary">{{ cat.name }}</a>
+                    </li>
                   {% endfor %}
               </ul>
             </div>
@@ -125,7 +124,7 @@
 
           <!-- الكتب -->
               {% for book in books %}
-              <div id="" class="col-md-4">
+              <div id="" class="col-md-4 hide_all_book book{{ book.category.id }} book{{ book.status }}">
                   <!-- Widget: user widget style 1 -->
                 <div id="" class="card card-widget widget-user ">
                   <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -135,8 +134,8 @@
                     <span class="sr-only">Toggle Dropdown</span>
                   </button>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">تعديل</a>
-                    <a class="dropdown-item" href="#">حذف</a>
+                    <a class="dropdown-item" href="{% url 'updateBook' book.id %}">تعديل</a>
+                    <a class="dropdown-item" href="{% url 'deleteBook' book.id %}">حذف</a>
                 <!-- Button trigger modal -->
                   </div>
                 </div>
@@ -169,10 +168,10 @@
                         <!-- /.col -->
                     <div class="col-sm-4 border-right">
                       <div class="description-block">
-                          {% if book.price %}
+                          {% if book.price and book.status in 'available sold' %}
                         <h5 class="description-header">{{ book.price }}ج</h5>
                         <span class="description-text">السعر</span>
-                          {% elif book.price_for_rent %}
+                          {% elif book.price_for_rent and book.status == 'rented' %}
                              <h5 class="description-header">{{ book.price_for_rent }}ج</h5>
                             <span class="description-text">في اليوم</span>
                           {% endif %}
